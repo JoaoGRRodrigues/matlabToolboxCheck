@@ -18,6 +18,8 @@ Also find function on MATLAB File Exchange: [![View matlabToolboxCheck on File E
 
 ## Usage
 
+All Name-Value pair input arguments described within the function. Normal options indicated below.
+
 ```MATLAB
 % Run with defaults (e.g. toolboxList and secondaryToolboxList options).
 [outputTable] = matlabToolboxCheck();
@@ -30,6 +32,9 @@ Also find function on MATLAB File Exchange: [![View matlabToolboxCheck on File E
 
 % Run giving out a table of all MATLAB toolboxes/features along with license availability and install status.
 [outputTable] = matlabToolboxCheck('dispType','all');
+
+% Set `displayOutput` to 0 to silently check toolboxes without outputting information to command line.
+[outputTable] = matlabToolboxCheck('dispType','all','dispOutput',0);
 
 ```
 
