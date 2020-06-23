@@ -14,7 +14,7 @@ Made in USA.<br>
 
 Download or clone the `matlabToolboxCheck` repository and place the root folder in the MATLAB path. Follow instructions for use below.
 
-<!-- Also find function on MATLAB File Exchange: [![View matlabToolboxCheck on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/75464-matlabToolboxCheck). -->
+Also find function on MATLAB File Exchange: [![View matlabToolboxCheck on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/77275-matlabtoolboxcheck).
 
 ## Usage
 
@@ -22,10 +22,10 @@ Download or clone the `matlabToolboxCheck` repository and place the root folder 
 % Run with defaults (e.g. toolboxList and secondaryToolboxList options).
 [outputTable] = matlabToolboxCheck();
 
-% Run with user input toolboxes.
+% Check for specific toolboxes requested by user.
 [outputTable] = matlabToolboxCheck('toolboxList',{'distrib_computing_toolbox','image_toolbox'},'secondaryToolboxList',{});
 
-% [Alternative] Run with user input toolboxes.
+% [Alternative] Check for specific toolboxes requested by user.
 [outputTable] = matlabToolboxCheck('toolboxList',{'Parallel Computing Toolbox','Image Processing Toolbox'},'secondaryToolboxList',{});
 
 % Run giving out a table of all MATLAB toolboxes/features along with license availability and install status.
