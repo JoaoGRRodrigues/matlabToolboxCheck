@@ -18,6 +18,9 @@ function [outputTable] = matlabToolboxCheck(varargin)
 	% Str: 'user' display only user toolboxes, 'all' display all toolboxes.
 	options.dispType = 'user';
 
+	% Binary: 1 = display output, 0 = do not display output
+	options.dispOutput = 1;
+
 	% Cell array of str: Essential toolboxes
 	options.toolboxList = {...
 		'distrib_computing_toolbox',...
@@ -81,13 +84,13 @@ function [outputTable] = matlabToolboxCheck(varargin)
 
 			if allToolboxSwitch==0
 				if listNo==1
-					disp('Required toolboxes (if warning appears, fix or install requested toolbox).');
+					subfxnDisp('Required toolboxes (if warning appears, fix or install requested toolbox).');
 				else
-					disp(' ');
-					disp('2nd tier toolbox check (not required for main pre-processing pipeline).');
+					subfxnDisp(' ');
+					subfxnDisp('2nd tier toolbox check (not required for main pre-processing pipeline).');
 				end
 			elseif allToolboxSwitch==1
-				disp('Listing all toolboxes.')
+				subfxnDisp('Listing all toolboxes.')
 			end
 
 			for toolboxNo = 1:nToolboxes
@@ -112,14 +115,22 @@ function [outputTable] = matlabToolboxCheck(varargin)
 				outputTable = [outputTable; {flexName,humanName,licenseSwitch,toolboxSwitch,licenseSwitch~=toolboxSwitch}];
 
 				if licenseSwitch==1&toolboxSwitch==1
-					fprintf('Toolbox license available and installed! %s (%s).\n',humanName,flexName)
+					if options.dispOutput==1
+						fprintf('Toolbox license available and toolbox is installed! %s (%s).\n',humanName,flexName)
+					end
 				elseif licenseSwitch==1&toolboxSwitch==0
-					warning('Toolbox license available but NOT installed. %s (%s).',humanName,flexName)
+					if options.dispOutput==1
+						warning('Toolbox license available but toolbox is NOT installed. %s (%s).',humanName,flexName)
+					end
 				else
 					if listNo==1
-						warning('Please install %s (%s) toolbox before running%s. This toolbox is likely required.',humanName,flexName,options.softwarePackage);
+						if options.dispOutput==1
+							warning('Please obtain license and install %s (%s) toolbox before running%s. This toolbox is likely required.',humanName,flexName,options.softwarePackage);
+						end
 					else
-						warning('Please install %s (%s) toolbox before running%s. Some features may not work otherwise.',humanName,flexName,options.softwarePackage);
+						if options.dispOutput==1
+							warning('Please obtain license and install %s (%s) toolbox before running%s. Some features may not work otherwise.',humanName,flexName,options.softwarePackage);
+						end
 					end
 				end
 			end
@@ -131,5 +142,10 @@ function [outputTable] = matlabToolboxCheck(varargin)
 		disp(repmat('@',1,7))
 		disp(getReport(err,'extended','hyperlinks','on'));
 		disp(repmat('@',1,7))
+	end
+	function subfxnDisp(inputStr)
+		if options.dispOutput==1
+			disp(inputStr)
+		end
 	end
 end
